@@ -93,7 +93,7 @@
         // GET: Products
         public ActionResult Index()
         {
-            return this.View(this.db.Product.ToList());
+            return this.View(this.db.Product.Take(10));
         }
 
         protected override void Dispose(bool disposing)
