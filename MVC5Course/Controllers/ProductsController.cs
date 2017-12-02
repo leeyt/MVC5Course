@@ -6,6 +6,7 @@
     using System.Web.Mvc;
 
     using MVC5Course.Models;
+    using MVC5Course.ViewModels;
 
     public class ProductsController : Controller
     {
@@ -94,6 +95,20 @@
         public ActionResult Index()
         {
             return this.View(this.db.Product.Take(10));
+        }
+
+        public ActionResult List()
+        {
+            var data = (from p in db.Product
+                       select new ProductListVM
+                       {
+                           ProductId = p.ProductId,
+                           ProductName = p.ProductName,
+                           Price = p.Price,
+                           Stock = p.Stock
+                       }).Take(10);
+
+            return View(data);
         }
 
         protected override void Dispose(bool disposing)
