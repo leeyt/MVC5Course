@@ -45,5 +45,20 @@
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult RedirectTest()
+        {
+            return RedirectToAction("FileTest", new { dl = 1 });
+        }
+
+        public ActionResult RedirectTest2()
+        {
+            return RedirectToRoute(new
+            {
+                controller = "Home",
+                action = "Index",
+                id = 123
+            });
+        }
     }
 }
