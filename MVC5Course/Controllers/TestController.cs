@@ -9,12 +9,11 @@
     public class TestController : Controller
     {
         private readonly FabricsEntities db = new FabricsEntities();
+        IProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Test
         public ActionResult Index()
         {
-            var repo = new ProductRepository();
-            repo.UnitOfWork = new EFUnitOfWork();
             var data = repo.All().Where(p => !p.IsDeleted);
 
             return View(data.Take(10));
