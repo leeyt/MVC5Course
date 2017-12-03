@@ -1,15 +1,11 @@
 ﻿namespace MVC5Course.Controllers
 {
-    using System.Data.Entity;
-    using System.Linq;
     using System.Web.Mvc;
 
     using MVC5Course.Models;
 
-    public class TestController : Controller
+    public class TestController : BaseController
     {
-        IProductRepository repo = RepositoryHelper.GetProductRepository();
-
         // GET: Test
         public ActionResult Index()
         {
