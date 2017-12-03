@@ -1,7 +1,9 @@
 ﻿namespace MVC5Course.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
-    public class ARController : Controller
+
+    public class ARController : BaseController
     {
         public ActionResult Index()
         {
@@ -29,6 +31,19 @@
             return dl == null
                 ? File(Server.MapPath("~/App_Data/HNCK1202-2.jpg"), "image/jpeg")
                 : File(Server.MapPath("~/App_Data/HNCK1202-2.jpg"), "image/jpeg", "IPhoneBroken.jpg");
+        }
+
+        public ActionResult JsonTest()
+        {
+            var data = (from p in this.repo.All()
+                       select new
+                       {
+                           p.ProductId,
+                           p.ProductName,
+                           p.Price
+                       }).Take(3);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }
