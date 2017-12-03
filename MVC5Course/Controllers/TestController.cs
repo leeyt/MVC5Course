@@ -8,7 +8,6 @@
 
     public class TestController : Controller
     {
-        private readonly FabricsEntities db = new FabricsEntities();
         IProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Test
@@ -31,8 +30,8 @@
         {
             if (ModelState.IsValid)
             {
-                db.Product.Add(data);
-                db.SaveChanges();
+                repo.Add(data);
+                repo.UnitOfWork.Commit();
 
                 return RedirectToAction("Index");
             }
@@ -42,7 +41,7 @@
 
         public ActionResult Edit(int id)
         {
-            var item = db.Product.Find(id);
+            var item = repo.Find(id);
 
             return View(item);
         }
@@ -53,13 +52,13 @@
         {
             if (ModelState.IsValid)
             {
-                var item = db.Product.Find(id);
+                var item = repo.Find(id);
 
                 item.ProductName = data.ProductName;
                 item.Price = data.Price;
                 item.Stock = data.Stock;
 
-                db.SaveChanges();
+                repo.UnitOfWork.Commit();
                 
                 return RedirectToAction("Index");
             }
@@ -67,18 +66,18 @@
             return View(data);
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View(db.Product.Take(10));
+            return View(repo.Find(id));
         }
 
         public ActionResult Delete(int id)
         {
-            var product = db.Product.Find(id);
+            var product = repo.Find(id);
 
             product.IsDeleted = true;
 
-            db.SaveChanges();
+            repo.UnitOfWork.Commit();
 
             return RedirectToAction("Index");
         }
