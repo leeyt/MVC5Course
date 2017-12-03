@@ -13,14 +13,13 @@
         // GET: Test
         public ActionResult Index()
         {
-            var data = repo.All().Where(p => !p.IsDeleted);
+            var data = repo.Get取得所有尚未刪除的商品資料Top10();
 
-            return View(data.Take(10));
+            return View(data);
         }
 
         public ActionResult Create()
         {
-
             return View();
         }
 
