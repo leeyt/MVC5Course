@@ -72,9 +72,11 @@
 
         public ActionResult Delete(int id)
         {
-            var product = repo.Find(id);
+            //var olRepo = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
+            //olRepo.Delete(olRepo.All().First(ol => ol.ProductId == id));
 
-            product.IsDeleted = true;
+            var product = repo.Find(id);
+            repo.Delete(product);
 
             repo.UnitOfWork.Commit();
 

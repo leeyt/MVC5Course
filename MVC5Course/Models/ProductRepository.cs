@@ -9,6 +9,11 @@ namespace MVC5Course.Models
             return base.All().Where(p => !p.IsDeleted);
         }
 
+        public override void Delete(Product product)
+        {
+            product.IsDeleted = true;
+        }
+
         public Product Find(int id)
         {
             return this.All().FirstOrDefault(p => p.ProductId == id);
@@ -32,6 +37,5 @@ namespace MVC5Course.Models
         IQueryable<Product> Get取得所有尚未刪除的商品資料();
 
         IQueryable<Product> Get取得所有尚未刪除的商品資料Top10();
-
     }
 }
