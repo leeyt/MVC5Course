@@ -23,5 +23,12 @@
         {
             return PartialView("JsAlertRedirect", "新增成功");
         }
+
+        public ActionResult FileTest(int? dl = 0)
+        {
+            return dl == null
+                ? File(Server.MapPath("~/App_Data/HNCK1202-2.jpg"), "image/jpeg")
+                : File(Server.MapPath("~/App_Data/HNCK1202-2.jpg"), "image/jpeg", "IPhoneBroken.jpg");
+        }
     }
 }
