@@ -14,6 +14,7 @@
         public ActionResult Index()
         {
             var data = from p in db.Product
+                       where !p.IsDeleted
                        select p;
 
             return View(data.Take(10));
@@ -76,9 +77,8 @@
         {
             var product = db.Product.Find(id);
 
-            db.OrderLine.RemoveRange(product.OrderLine.ToList());
+            product.IsDeleted = true;
 
-            db.Product.Remove(product);
             db.SaveChanges();
 
             return RedirectToAction("Index");
