@@ -28,6 +28,8 @@
                 repo.Add(data);
                 repo.UnitOfWork.Commit();
 
+                TempData["ProductItem"] = data;
+
                 return RedirectToAction("Index");
             }
 
