@@ -79,11 +79,12 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Edit(int id)
         {
-            if (this.ModelState.IsValid)
+            var product = db.Product.Find(id);
+
+            if (TryUpdateModel(product, new string[] { "ProductId", "Price", "Active", "Stock" }))
             {
-                this.db.Entry(product).State = EntityState.Modified;
                 this.db.SaveChanges();
                 return this.RedirectToAction("Index");
             }

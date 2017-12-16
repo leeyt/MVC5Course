@@ -26,7 +26,7 @@ namespace MVC5Course.Models
         
         [Required(ErrorMessage = "請輸入產品名稱")]
         [StringLength(80, ErrorMessage="欄位長度不得大於 80 個字元")]
-        [身分證字號(ErrorMessage = "必須包含 Will")]
+        //[身分證字號(ErrorMessage = "必須包含 Will")]
         public string ProductName { get; set; }
 
         [Required]
