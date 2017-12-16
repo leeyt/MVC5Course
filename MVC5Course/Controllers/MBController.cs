@@ -1,6 +1,7 @@
 ﻿namespace MVC5Course.Controllers
 {
     using System;
+    using System.Data.Entity.Validation;
     using System.Web.Mvc;
 
     public class MBBatchUpdateVM
@@ -25,6 +26,7 @@
         }
 
         [HttpPost]
+        [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
         public ActionResult Index(MBBatchUpdateVM[] batch)
         {
             if (ModelState.IsValid)
