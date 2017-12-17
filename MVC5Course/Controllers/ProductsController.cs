@@ -1,5 +1,6 @@
 ﻿namespace MVC5Course.Controllers
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -15,6 +16,26 @@
         // GET: Products/Create
         public ActionResult Create()
         {
+            /*
+            var prices = new List<SelectListItem>
+            {
+                new SelectListItem { Text = "$30", Value = "30" },
+                new SelectListItem { Text = "$40", Value = "40" },
+                new SelectListItem { Text = "$50", Value = "50" }
+            };
+            */
+
+            var prices = (from p in db.Product
+                          select new
+                          {
+                              Text = p.Price,
+                              Value = p.Price
+                          })
+                          .Distinct()
+                          .OrderBy(p => p.Value);
+
+            ViewBag.Price = new SelectList(prices, "Value", "Text");
+
             return this.View();
         }
 
@@ -74,6 +95,17 @@
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var product = this.db.Product.Find(id);
             if (product == null) return this.HttpNotFound();
+
+            var prices = (from p in db.Product
+                          select new
+                          {
+                              Text = p.Price,
+                              Value = p.Price
+                          })
+              .Distinct()
+              .OrderBy(p => p.Value);
+
+            ViewBag.Price = new SelectList(prices, "Value", "Text", product.Price);
             return this.View(product);
         }
 
