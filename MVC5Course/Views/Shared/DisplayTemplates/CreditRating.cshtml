@@ -1,0 +1,11 @@
+﻿@model Nullable<double>
+
+@if (Model.HasValue)
+{
+    <span style="color: yellow">
+    @for (int i = 0; i < Model.Value; i++)
+    {
+        @("★")
+    }
+    </span>
+}
