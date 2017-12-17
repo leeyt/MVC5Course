@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
-
+    using MVC5Course.ActionFilters;
     using MVC5Course.Models;
     using MVC5Course.ViewModels;
 
@@ -14,28 +14,9 @@
         private readonly FabricsEntities db = new FabricsEntities();
 
         // GET: Products/Create
+        [提供產品價格下拉式選單資料Attrbiute]
         public ActionResult Create()
         {
-            /*
-            var prices = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "$30", Value = "30" },
-                new SelectListItem { Text = "$40", Value = "40" },
-                new SelectListItem { Text = "$50", Value = "50" }
-            };
-            */
-
-            var prices = (from p in db.Product
-                          select new
-                          {
-                              Text = p.Price,
-                              Value = p.Price
-                          })
-                          .Distinct()
-                          .OrderBy(p => p.Value);
-
-            ViewBag.Price = new SelectList(prices, "Value", "Text");
-
             return this.View();
         }
 
@@ -90,23 +71,13 @@
         }
 
         // GET: Products/Edit/5
+        [提供產品價格下拉式選單資料Attrbiute]
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var product = this.db.Product.Find(id);
             if (product == null) return this.HttpNotFound();
 
-            var prices = db.Product
-                .AsEnumerable()
-                .Select(p => new
-                {
-                    Text = string.Format("{0:c}", p.Price),
-                    Value = p.Price
-                })
-                .Distinct()
-                .OrderBy(p => p.Value);
-
-            ViewBag.Price = new SelectList(prices, "Value", "Text");
             return this.View(product);
         }
 

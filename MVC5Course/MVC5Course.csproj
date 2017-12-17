@@ -178,6 +178,7 @@
   <ItemGroup>
     <Compile Include="ActionFilters\LocalOnlyAttribute.cs" />
     <Compile Include="ActionFilters\ShareDataAttribute.cs" />
+    <Compile Include="ActionFilters\提供產品價格下拉式選單資料Attrbiute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
