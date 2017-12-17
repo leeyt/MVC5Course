@@ -96,16 +96,17 @@
             var product = this.db.Product.Find(id);
             if (product == null) return this.HttpNotFound();
 
-            var prices = (from p in db.Product
-                          select new
-                          {
-                              Text = p.Price,
-                              Value = p.Price
-                          })
-              .Distinct()
-              .OrderBy(p => p.Value);
+            var prices = db.Product
+                .AsEnumerable()
+                .Select(p => new
+                {
+                    Text = string.Format("{0:c}", p.Price),
+                    Value = p.Price
+                })
+                .Distinct()
+                .OrderBy(p => p.Value);
 
-            ViewBag.Price = new SelectList(prices, "Value", "Text", product.Price);
+            ViewBag.Price = new SelectList(prices, "Value", "Text");
             return this.View(product);
         }
 
