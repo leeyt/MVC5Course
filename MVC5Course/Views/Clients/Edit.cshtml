@@ -1,0 +1,12 @@
+﻿@model MVC5Course.Models.Client
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorFor(m => m)
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
