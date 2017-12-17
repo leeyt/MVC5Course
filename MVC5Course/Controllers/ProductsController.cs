@@ -62,6 +62,9 @@
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var product = this.db.Product.Find(id);
             if (product == null) return this.HttpNotFound();
+
+            ViewBag.OrderLines = product.OrderLine.ToList();
+
             return this.View(product);
         }
 
