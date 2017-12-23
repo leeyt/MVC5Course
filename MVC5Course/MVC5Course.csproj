@@ -582,6 +582,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CreditRating.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateOfBirth.cshtml" />
     <Content Include="Views\Home\AjaxIndex.cshtml" />
+    <Content Include="Views\Home\TestEncode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,7 +44,10 @@ namespace MVC5Course.Controllers
         public ActionResult GetTime()
         {
             return Content(DateTime.Now.ToString("yyy-mm-dd HH:MM:ss"));
+        }
 
+        public ActionResult TestEncode()
+        {
             return View();
         }
     }

@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+
+    var html = "<h1>Hello 哈囉 World</h1>";
+}
+
+@*直接輸出內含 HTML 的字串*@
+
+@html
+
+<hr />
+
+@*使用 Html.Raw 輸出內含 HTML 的字串*@
+
+@Html.Raw(html)
+
+<hr />
+
+@*在網址列輸出未編碼的字串*@
+
+<a href="/Home/TestEncode?html=@(html)">Content</a>
+
+<hr />
+
+@*網址輸出字串要使用 Url.Encode *@
+
+<a href="/Home/TestEncode?html=@Url.Encode(html)">Url Encode</a>
+
+<hr />
+
+@{ 
+    var path = "/Home/首頁";
+}
+
+@*中文網址要用 UrlPath 編碼過*@
+
+<a href="@HttpUtility.UrlPathEncode(path)?html=@Url.Encode(html)">Path Encode</a>
+
+<hr />
+
+@{ 
+    var msg = @"新增成功!
+
+
+Hello";
+}
+
+<script>
+    alert('@Ajax.JavaScriptStringEncode(msg)');
+</script>
