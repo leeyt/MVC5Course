@@ -5,6 +5,12 @@
 
 @{
     ViewBag.Title = "Index";
+    var pagedListData = Model as IPagedList<Product>;
+
+    if (IsAjax)
+    {
+        Layout = null;
+    }
 }
 
 <h2>Index</h2>
@@ -12,6 +18,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@Html.PagedListPager(pagedListData, p => Url.Action("Index", new { pageNumber = p }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main"))
 <table class="table">
     <tr>
         <th>
@@ -61,8 +68,8 @@
 
 </table>
 
-@{ 
-    var data = Model as IPagedList<Product>;
-}
+@Html.PagedListPager(pagedListData, p => Url.Action("Index", new { pageNumber = p }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main"))
 
-@Html.PagedListPager(data, p => Url.Action("Index", new { pageNumber = p }))
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
