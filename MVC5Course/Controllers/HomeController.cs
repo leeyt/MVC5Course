@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using MVC5Course.ActionFilters;
 
 namespace MVC5Course.Controllers
@@ -32,6 +33,18 @@ namespace MVC5Course.Controllers
 
         public ActionResult MetroIndex()
         {
+            return View();
+        }
+
+        public ActionResult AjaxIndex()
+        {
+            return View();
+        }
+
+        public ActionResult GetTime()
+        {
+            return Content(DateTime.Now.ToString("yyy-mm-dd HH:MM:ss"));
+
             return View();
         }
     }
