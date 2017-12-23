@@ -1,13 +1,16 @@
 ﻿namespace MVC5Course.Controllers
 {
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+
     using MVC5Course.ActionFilters;
     using MVC5Course.Models;
     using MVC5Course.ViewModels;
+
+    using PagedList;
+    using PagedList.Mvc;
 
     public class ProductsController : Controller
     {
@@ -100,9 +103,12 @@
         }
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int pageNumber = 1)
         {
-            return this.View(this.db.Product.Take(10));
+            var data = db.Product.OrderBy(p => p.ProductId)
+                .ToPagedList(pageNumber, 10);
+
+            return this.View(data);
         }
 
         public ActionResult List()
