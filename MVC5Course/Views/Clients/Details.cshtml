@@ -1,11 +1,17 @@
 ﻿@model MVC5Course.Models.Client
 
+@if (IsAjax) {
+    Layout = null;
+}
+
 <div>
     <h4>Client</h4>
     <hr />
     @Html.DisplayForModel()
 </div>
+@if (!IsAjax) {
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+}
