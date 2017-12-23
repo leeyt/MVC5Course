@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.Security.Application
+
+@{
     Layout = null;
 
     var html = "<h1>Hello 哈囉 World</h1>";
@@ -48,3 +50,10 @@ Hello";
 <script>
     alert('@Ajax.JavaScriptStringEncode(msg)');
 </script>
+
+@{ 
+    var xss = @"<h1>Hello <script>alert('XSS');</script> World</h1>";
+}
+
+@Html.Raw(Encoder.HtmlEncode(xss))
+@Html.Raw(Sanitizer.GetSafeHtmlFragment(xss))
